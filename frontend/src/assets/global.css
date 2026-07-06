@@ -1,0 +1,378 @@
+/* ============================================
+   软件测试实践教学管理平台 - 全局样式
+   统一字体、配色、按钮、弹窗、表格等样式
+   ============================================ */
+
+/* --- 全局 CSS 变量 --- */
+:root {
+  --color-primary: #409EFF;
+  --color-primary-light: #ecf5ff;
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #C0C4CC;
+
+  --border-color: #EBEEF5;
+  --border-color-light: #F2F6FC;
+
+  --bg-page: #f0f2f5;
+  --bg-white: #ffffff;
+  --bg-card: #ffffff;
+
+  --sidebar-bg: #304156;
+  --sidebar-hover: #263445;
+
+  --shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 2px 8px 0 rgba(0, 0, 0, 0.06);
+
+  --radius-base: 4px;
+  --radius-card: 6px;
+
+  --font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-size-base: 14px;
+  --font-size-sm: 12px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-title: 20px;
+}
+
+/* --- 全局重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 统一页面标题样式 --- */
+.page-title {
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* --- 统一页面头部 --- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-header h3 {
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin: 0;
+}
+
+.page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- 统一卡片样式 --- */
+.el-card {
+  border-radius: var(--radius-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.el-card__header {
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 14px 20px !important;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+}
+
+.el-card__body {
+  padding: 20px !important;
+}
+
+/* --- 统一表格样式 --- */
+.el-table {
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+}
+
+.el-table th {
+  background-color: #fafafa !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  padding: 12px 0;
+  text-align: center !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+
+.el-table td {
+  padding: 12px 0;
+  text-align: center !important;
+  color: var(--text-regular);
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: #fafbfc;
+}
+
+.el-table__body tr:hover > td {
+  background-color: #f5f7fa !important;
+}
+
+/* 表格内按钮间距 */
+.el-table .el-button + .el-button {
+  margin-left: 6px;
+}
+
+/* --- 统一按钮样式 --- */
+.el-button {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-base);
+  transition: all 0.2s ease;
+}
+
+.el-button--primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.el-button--primary:hover {
+  background-color: #66b1ff;
+  border-color: #66b1ff;
+}
+
+.el-button--small {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+/* --- 统一弹窗样式 --- */
+.el-dialog {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.el-dialog__header {
+  padding: 20px 24px 16px !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.el-dialog__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.el-dialog__body {
+  padding: 24px !important;
+}
+
+.el-dialog__footer {
+  padding: 12px 24px 20px !important;
+  border-top: 1px solid var(--border-color);
+  text-align: right;
+}
+
+/* --- 统一表单项样式 --- */
+.el-form-item__label {
+  font-weight: 500;
+  color: var(--text-regular);
+}
+
+.el-input__inner {
+  border-radius: var(--radius-base);
+}
+
+.el-textarea__inner {
+  border-radius: var(--radius-base);
+  font-family: var(--font-family);
+}
+
+.el-select .el-input__inner {
+  border-radius: var(--radius-base);
+}
+
+/* --- 统一标签样式 --- */
+.el-tag {
+  border-radius: var(--radius-base);
+  font-weight: 500;
+}
+
+/* --- 统一分页样式 --- */
+.el-pagination {
+  padding: 16px 0 4px;
+  text-align: right;
+  font-weight: normal;
+}
+
+.el-pagination .el-pager li {
+  font-weight: 500;
+  border-radius: var(--radius-base);
+}
+
+/* --- 统一分隔线 --- */
+.el-divider__text {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  font-weight: 500;
+  background-color: var(--bg-white);
+}
+
+/* --- 统计卡片通用样式 --- */
+.stat-card {
+  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stat-card .el-card__body {
+  display: flex;
+  align-items: center;
+  padding: 20px !important;
+}
+
+.stat-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* --- 空状态组件增强 --- */
+.empty-state-wrap {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-placeholder);
+}
+
+.empty-state-wrap .empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  color: #dcdfe6;
+}
+
+.empty-state-wrap .empty-text {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.empty-state-wrap .empty-subtext {
+  font-size: var(--font-size-sm);
+  color: var(--text-placeholder);
+}
+
+/* --- 代码展示区域 --- */
+.code-block {
+  background: #f5f7fa;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-base);
+  padding: 12px 16px;
+  font-family: 'Consolas', 'Courier New', 'Source Code Pro', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+  color: var(--text-primary);
+}
+
+.code-viewer {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: var(--radius-base);
+  padding: 16px 20px;
+  font-family: 'Consolas', 'Courier New', 'Source Code Pro', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+/* --- 提示区域 --- */
+.info-tip {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* --- 上传组件美化 --- */
+.el-upload {
+  text-align: left;
+}
+
+.el-upload-list__item {
+  border-radius: var(--radius-base);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s;
+}
+
+.el-upload-list__item:hover {
+  border-color: var(--color-primary);
+}
+
+/* --- 滚动条美化 --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c4cc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #909399;
+}
