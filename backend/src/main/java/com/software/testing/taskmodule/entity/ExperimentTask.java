@@ -1,6 +1,7 @@
 package com.software.testing.taskmodule.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ public class ExperimentTask {
     private String description;
     private String requirement;
     private Long teacherId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime deadline;
     private Integer status;              // 0-草稿 1-已发布 2-已截止
     @TableField(fill = FieldFill.INSERT)

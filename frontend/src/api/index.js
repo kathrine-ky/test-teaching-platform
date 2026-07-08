@@ -8,9 +8,8 @@
 //
 // 为保持向后兼容，统一重新导出所有接口：
 
-export { login, register, getUserInfo } from '@/UserModule/api'
-export { createCourse, updateCourse, deleteCourse, getCourseDetail, listCourses } from '@/CourseModule/api'
+export { login, register, getUserInfo, changePassword, adminRegister, adminResetPassword } from '@/UserModule/api'
+export { createCourse, updateCourse, deleteCourse, getCourseDetail, listCourses, listStudentCourses } from '@/CourseModule/api'
 export { createTask, updateTask, deleteTask, getTaskDetail, listTasks, publishTask } from '@/TaskModule/api'
 export { submitHomework, getMySubmission, getSubmissionsByTask, reviewSubmission, downloadFile } from '@/SubmitModule/api'
 export { getMyScores, getScoreStatistics, exportScores } from '@/ScoreModule/api'
-

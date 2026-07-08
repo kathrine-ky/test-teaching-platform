@@ -2,11 +2,16 @@
 -- Project One - 软件测试实践教学管理平台
 -- 初始化测试数据 (数据库: teaching_platform)
 -- 预置账号:
+--   管理员: admin / 123456 (系统管理员)
 --   教师: teacher01 / 123456 (王老师)
 --   学生: stu01 / 123456 (张三), stu02 / 123456 (李四), stu03 / 123456 (王五)
 -- =============================================
 
 -- ========== 初始化用户 ==========
+-- 管理员1个
+INSERT IGNORE INTO t_user (id, username, password, real_name, role, gender) VALUES
+(5, 'admin', '123456', '系统管理员', 'ADMIN', '男');
+
 -- 教师1个
 INSERT IGNORE INTO t_user (id, username, password, real_name, role, class_name, student_no) VALUES
 (1, 'teacher01', '123456', '王老师', 'TEACHER', NULL, NULL);
@@ -23,10 +28,26 @@ INSERT IGNORE INTO t_user (id, username, password, real_name, role, class_name, 
 
 -- ========== 初始化课程 ==========
 INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
-(1, '软件测试', '软件测试理论与方法，包括黑盒测试、白盒测试、自动化测试等内容', 1);
+(1, '数据结构与算法', '常见数据结构（数组、链表、栈、队列、树、图）与经典算法（排序、查找、动态规划等）', 1);
 
 INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
-(2, '软件工程', '软件开发流程、需求分析、系统设计、项目管理等', 1);
+(2, '软件测试基础', '软件测试基本概念、测试流程、测试策略、测试文档编写等基础知识', 1);
+
+INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
+(3, '黑盒测试技术', '等价类划分、边界值分析、因果图、决策表、正交实验法等黑盒测试方法', 1);
+
+INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
+(4, '白盒测试技术', '语句覆盖、分支覆盖、路径覆盖、条件覆盖等白盒测试技术与代码审查', 1);
+
+INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
+(5, '自动化测试', 'Selenium、JUnit、TestNG等自动化测试框架的使用与脚本开发', 1);
+
+INSERT IGNORE INTO t_course (id, course_name, description, teacher_id) VALUES
+(6, '软件缺陷管理', '缺陷生命周期、缺陷报告编写、缺陷跟踪工具（Jira/Bugzilla）使用', 1);
+
+-- ========== 初始化课程-学生分配 ==========
+INSERT IGNORE INTO t_course_student (course_id, student_id) VALUES
+(1,2),(1,3),(2,2),(2,3),(2,4),(3,2),(3,4),(4,3),(4,4),(5,2),(5,3),(6,4);
 
 -- ========== 初始化实验任务 ==========
 INSERT IGNORE INTO t_experiment_task (id, course_id, title, description, requirement, teacher_id, deadline, status) VALUES

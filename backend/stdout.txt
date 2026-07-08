@@ -1,0 +1,157 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.software.testing:teaching-platform >---------------
+[INFO] Building teaching-platform 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:2.7.18:run (default-cli) > test-compile @ teaching-platform >>>
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ teaching-platform ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ teaching-platform ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.2.0:testResources (default-testResources) @ teaching-platform ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory E:\vscode\projectone\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ teaching-platform ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:2.7.18:run (default-cli) < test-compile @ teaching-platform <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:2.7.18:run (default-cli) @ teaching-platform ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.18)
+
+2026-07-07 11:42:17.816  INFO 21004 --- [           main] c.s.testing.TeachingPlatformApplication  : Starting TeachingPlatformApplication using Java 1.8.0_121 on LAPTOP-B85AEVP1 with PID 21004 (E:\vscode\projectone\backend\target\classes started by HP in E:\vscode\projectone\backend)
+2026-07-07 11:42:17.818  INFO 21004 --- [           main] c.s.testing.TeachingPlatformApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-07-07 11:42:18.212  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'com.software.testing.usermodule.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.213  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'courseFileMapper' and 'com.software.testing.coursemodule.mapper.CourseFileMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.214  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'courseMapper' and 'com.software.testing.coursemodule.mapper.CourseMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.214  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'courseStudentMapper' and 'com.software.testing.coursemodule.mapper.CourseStudentMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.214  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'experimentTaskMapper' and 'com.software.testing.taskmodule.mapper.ExperimentTaskMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.214  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'taskFileMapper' and 'com.software.testing.taskmodule.mapper.TaskFileMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.215  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'submissionMapper' and 'com.software.testing.submitmodule.mapper.SubmissionMapper' mapperInterface. Bean already defined with the same name!
+2026-07-07 11:42:18.215  WARN 21004 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.software.testing.usermodule.mapper, com.software.testing.coursemodule.mapper, com.software.testing.taskmodule.mapper, com.software.testing.submitmodule.mapper, com.software.testing.scoremodule.mapper]' package. Please check your configuration.
+2026-07-07 11:42:18.592  INFO 21004 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2026-07-07 11:42:18.602  INFO 21004 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-07 11:42:18.602  INFO 21004 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.83]
+2026-07-07 11:42:18.676  INFO 21004 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-07 11:42:18.677  INFO 21004 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 828 ms
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@1d12b024'
+Property 'mapperLocations' was not specified.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.3.1 
+2026-07-07 11:42:19.762  INFO 21004 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2026-07-07 11:42:19.775  INFO 21004 --- [           main] c.s.testing.TeachingPlatformApplication  : Started TeachingPlatformApplication in 2.148 seconds (JVM running for 2.429)
+2026-07-07 11:42:19.777  INFO 21004 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-07 11:42:19.856  INFO 21004 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-07 11:42:19.858  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : ========== 数据库结构检查开始 ==========
+2026-07-07 11:42:19.880  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 code_text 已存在
+2026-07-07 11:42:19.884  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 test_case 已存在
+2026-07-07 11:42:19.887  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 defect_report 已存在
+2026-07-07 11:42:19.891  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 test_summary 已存在
+2026-07-07 11:42:19.895  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_url 已存在
+2026-07-07 11:42:19.897  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_path 已存在
+2026-07-07 11:42:19.899  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_name 已存在
+2026-07-07 11:42:19.903  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_url2 已存在
+2026-07-07 11:42:19.907  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_path2 已存在
+2026-07-07 11:42:19.909  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_name2 已存在
+2026-07-07 11:42:19.914  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_url3 已存在
+2026-07-07 11:42:19.916  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_path3 已存在
+2026-07-07 11:42:19.922  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_submission 字段 file_name3 已存在
+2026-07-07 11:42:19.925  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 表 t_user 字段 gender 已存在
+2026-07-07 11:42:19.928  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] admin 管理员账号已存在
+2026-07-07 11:42:19.930  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] t_course_student 表已存在
+2026-07-07 11:42:19.933  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 初始课程数据已存在 (7门)
+2026-07-07 11:42:19.934  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] 课程学生分配数据已存在
+2026-07-07 11:42:19.935  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] t_task_file 表已存在
+2026-07-07 11:42:19.937  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] t_discussion_post 表已存在
+2026-07-07 11:42:19.939  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] t_discussion_comment 表已存在
+2026-07-07 11:42:19.940  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : [检查通过] t_course_file 表已存在
+2026-07-07 11:42:19.942  INFO 21004 --- [           main] c.s.testing.config.DatabaseInitializer   : ========== 数据库结构检查完成 ==========
+2026-07-07 11:43:18.764  INFO 21004 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-07 11:43:18.764  INFO 21004 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-07 11:43:18.765  INFO 21004 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-07 11:43:42.545 ERROR 21004 --- [nio-8080-exec-3] c.s.t.config.GlobalExceptionHandler      : [请求方法错误] Request method 'GET' not supported
+
+org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.handleNoMatch(RequestMappingInfoHandlerMapping.java:260) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:442) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:383) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:125) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:67) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:498) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1266) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1048) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) [spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) [tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) [tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) [tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_121]
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:27 min
+[INFO] Finished at: 2026-07-07T11:44:42+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project teaching-platform: Application finished with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

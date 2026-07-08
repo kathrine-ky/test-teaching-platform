@@ -12,6 +12,11 @@ public class Course {
     private String courseName;
     private String description;
     private Long teacherId;
+
+    /** 教师姓名（非数据库字段，查询时填充） */
+    @TableField(exist = false)
+    private String teacherName;
+
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)

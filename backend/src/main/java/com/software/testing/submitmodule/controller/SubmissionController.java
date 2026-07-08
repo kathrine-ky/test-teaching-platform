@@ -27,11 +27,16 @@ public class SubmissionController {
 
     @PostMapping("/submit/{taskId}")
     public Result<?> submit(@PathVariable Long taskId,
+                            @RequestParam(required = false) String testCase,
+                            @RequestParam(required = false) String defectReport,
+                            @RequestParam(required = false) String testSummary,
                             @RequestParam(required = false) String codeText,
                             @RequestParam(required = false) MultipartFile file,
+                            @RequestParam(required = false) MultipartFile file2,
+                            @RequestParam(required = false) MultipartFile file3,
                             HttpServletRequest request) {
         Long studentId = (Long) request.getAttribute("userId");
-        return submissionService.submit(taskId, studentId, codeText, file);
+        return submissionService.submit(taskId, studentId, testCase, defectReport, testSummary, codeText, file, file2, file3);
     }
 
     @GetMapping("/my/{taskId}")
@@ -70,12 +75,25 @@ public class SubmissionController {
                 .body(data);
     }
 
+    /** 教师端：获取所有已发布任务的提交状态汇总 */
+    @GetMapping("/teacher/submission-summary")
+    public Result<?> getTeacherSubmissionSummary(HttpServletRequest request) {
+        Long teacherId = (Long) request.getAttribute("userId");
+        return submissionService.getTeacherSubmissionSummary(teacherId);
+    }
+
     @GetMapping("/download")
     public ResponseEntity<Resource> download(@RequestParam String path) {
         try {
-            File file = new File("./" + path);
+            // 去掉可能的前导斜杠，确保路径拼接正确
+            String normalizedPath = path.startsWith("/") ? path.substring(1) : path;
+            File file = new File("./" + normalizedPath);
             if (!file.exists()) {
-                return ResponseEntity.notFound().build();
+                // 尝试直接用绝对路径查找（uploadDir可能是相对路径）
+                file = new File(normalizedPath);
+                if (!file.exists()) {
+                    return ResponseEntity.notFound().build();
+                }
             }
             Resource resource = new FileSystemResource(file);
             String encodedName = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8.toString())

@@ -37,9 +37,16 @@ public class SubmissionServiceImpl implements SubmissionService {
 
     @Override
     @Transactional
-    public Result<?> submit(Long taskId, Long studentId, String codeText, MultipartFile file) {
-        log.info("[提交作业] taskId={}, studentId={}, hasFile={}, hasCodeText={}",
-                taskId, studentId, file != null && !file.isEmpty(), codeText != null && !codeText.isEmpty());
+    public Result<?> submit(Long taskId, Long studentId, String testCase, String defectReport, String testSummary,
+                            String codeText, MultipartFile file, MultipartFile file2, MultipartFile file3) {
+        log.info("[提交作业] taskId={}, studentId={}, hasTestCase={}, hasDefectReport={}, hasTestSummary={}, hasFile1={}, hasFile2={}, hasFile3={}",
+                taskId, studentId,
+                testCase != null && !testCase.isEmpty(),
+                defectReport != null && !defectReport.isEmpty(),
+                testSummary != null && !testSummary.isEmpty(),
+                file != null && !file.isEmpty(),
+                file2 != null && !file2.isEmpty(),
+                file3 != null && !file3.isEmpty());
         ExperimentTask task = taskMapper.selectById(taskId);
         if (task == null) {
             log.warn("[任务不存在] taskId={}", taskId);
@@ -60,62 +67,76 @@ public class SubmissionServiceImpl implements SubmissionService {
             submission.setStudentId(studentId);
             log.info("[新建提交记录] taskId={}, studentId={}", taskId, studentId);
         } else {
-            log.info("[更新提交记录] submissionId={}, 已有fileUrl={}, 已有fileName={}",
-                    submission.getId(), submission.getFileUrl(), submission.getFileName());
+            log.info("[更新提交记录] submissionId={}", submission.getId());
         }
 
-        // 处理文件上传 - 关键修复：确保 fileUrl/filePath/fileName 正确写入
-        if (file != null && !file.isEmpty()) {
-            try {
-                String originalFilename = file.getOriginalFilename();
-                log.info("[接收文件] 原始文件名={}, 文件大小={}bytes, contentType={}",
-                        originalFilename, file.getSize(), file.getContentType());
-                String relativePath = saveFile(file, "submissions/" + taskId + "/" + studentId);
-                log.info("[文件保存成功] 存储路径={}", relativePath);
-
-                // 确保 fileUrl/filePath/fileName 全部设置（非空判断后强制赋值）
-                submission.setFilePath(relativePath);
-                submission.setFileUrl(relativePath);
-                submission.setFileName(originalFilename != null ? originalFilename : "unknown_file");
-                log.info("[实体设置完成] filePath={}, fileUrl={}, fileName={}",
-                        submission.getFilePath(), submission.getFileUrl(), submission.getFileName());
-            } catch (IOException e) {
-                log.error("[文件保存失败] taskId={}, studentId={}", taskId, studentId, e);
-                return Result.error("文件保存失败: " + e.getMessage());
-            }
-        } else {
-            log.info("[无文件上传] 跳过文件处理");
-            // 如果是更新且没有新文件，保留原有的文件信息（不做任何设置）
-            // 注意：新建记录且无文件时，fileUrl/filePath/fileName 保持 null
-        }
-
-        // 存储代码文本（仅在非空时设置，避免覆盖已有值）
+        // 处理测试用例文本
+        if (testCase != null && !testCase.isEmpty()) {
+            submission.setTestCase(testCase);
+        } else if (isNew) { submission.setTestCase(null); }
+        // 处理缺陷报告文本
+        if (defectReport != null && !defectReport.isEmpty()) {
+            submission.setDefectReport(defectReport);
+        } else if (isNew) { submission.setDefectReport(null); }
+        // 处理测试总结文本
+        if (testSummary != null && !testSummary.isEmpty()) {
+            submission.setTestSummary(testSummary);
+        } else if (isNew) { submission.setTestSummary(null); }
+        // 处理代码文本（兼容旧字段）
         if (codeText != null && !codeText.isEmpty()) {
             submission.setCodeText(codeText);
-            log.info("[代码文本设置] 长度={}", codeText.length());
-        } else if (isNew) {
-            submission.setCodeText(null);
+        } else if (isNew) { submission.setCodeText(null); }
+
+        // 处理多个文件上传
+        MultipartFile[] files = {file, file2, file3};
+        for (int i = 0; i < files.length; i++) {
+            if (files[i] != null && !files[i].isEmpty()) {
+                try {
+                    String originalFilename = files[i].getOriginalFilename();
+                    String relativePath = saveFile(files[i], "submissions/" + taskId + "/" + studentId);
+                    log.info("[文件{}保存成功] 存储路径={}", i + 1, relativePath);
+                    // 通过反射设置字段值（或用 switch）
+                    switch (i) {
+                        case 0:
+                            submission.setFilePath(relativePath);
+                            submission.setFileUrl(relativePath);
+                            submission.setFileName(originalFilename != null ? originalFilename : "unknown_file");
+                            break;
+                        case 1:
+                            submission.setFilePath2(relativePath);
+                            submission.setFileUrl2(relativePath);
+                            submission.setFileName2(originalFilename != null ? originalFilename : "unknown_file");
+                            break;
+                        case 2:
+                            submission.setFilePath3(relativePath);
+                            submission.setFileUrl3(relativePath);
+                            submission.setFileName3(originalFilename != null ? originalFilename : "unknown_file");
+                            break;
+                    }
+                } catch (IOException e) {
+                    log.error("[文件保存失败] taskId={}, studentId={}, fileIndex={}", taskId, studentId, i, e);
+                    return Result.error("文件保存失败: " + e.getMessage());
+                }
+            }
         }
 
         submission.setStatus(1);
         submission.setSubmitTime(LocalDateTime.now());
 
         if (isNew) {
-            log.info("[执行插入] fileUrl={}, fileName={}", submission.getFileUrl(), submission.getFileName());
             submissionMapper.insert(submission);
         } else {
-            log.info("[执行更新] id={}, fileUrl={}, fileName={}", submission.getId(), submission.getFileUrl(), submission.getFileName());
             submissionMapper.updateById(submission);
         }
 
         // 重新查询确认数据库中的值
         Submission verify = submissionMapper.selectById(submission.getId());
-        log.info("[提交作业成功-验证] submissionId={}, taskId={}, studentId={}, codeText={}, fileUrl={}, fileName={}, filePath={}",
-                verify.getId(), verify.getTaskId(), verify.getStudentId(),
-                verify.getCodeText() != null ? "有(" + verify.getCodeText().length() + "字)" : "无",
-                verify.getFileUrl(),
-                verify.getFileName(),
-                verify.getFilePath());
+        log.info("[提交作业成功-验证] submissionId={}, testCase={}, defectReport={}, testSummary={}, fileUrl={}, fileUrl2={}, fileUrl3={}",
+                verify.getId(),
+                verify.getTestCase() != null ? "有(" + verify.getTestCase().length() + "字)" : "无",
+                verify.getDefectReport() != null ? "有(" + verify.getDefectReport().length() + "字)" : "无",
+                verify.getTestSummary() != null ? "有(" + verify.getTestSummary().length() + "字)" : "无",
+                verify.getFileUrl(), verify.getFileUrl2(), verify.getFileUrl3());
 
         return Result.success("提交成功", verify);
     }
@@ -180,6 +201,9 @@ public class SubmissionServiceImpl implements SubmissionService {
     public Result<?> getScoreStatistics(Long taskId) {
         log.info("[查询成绩统计] taskId={}", taskId);
         List<Map<String, Object>> scores = submissionMapper.selectScoresByTaskId(taskId);
+        // 获取提交状态统计
+        Map<String, Object> statusStats = submissionMapper.selectStatusStatsByTaskId(taskId);
+
         if (scores.isEmpty()) {
             Map<String, Object> empty = new HashMap<>();
             empty.put("avgScore", 0);
@@ -187,6 +211,10 @@ public class SubmissionServiceImpl implements SubmissionService {
             empty.put("minScore", 0);
             empty.put("count", 0);
             empty.put("details", Collections.emptyList());
+            empty.put("distribution", computeDistribution(Collections.emptyList()));
+            empty.put("notSubmitted", statusStats != null ? ((Number) statusStats.get("notSubmitted")).intValue() : 0);
+            empty.put("submittedCount", statusStats != null ? ((Number) statusStats.get("submitted")).intValue() : 0);
+            empty.put("totalStudents", statusStats != null ? ((Number) statusStats.get("total")).intValue() : 0);
             return Result.success(empty);
         }
         double avg = scores.stream().mapToInt(s -> ((Number) s.get("score")).intValue()).average().orElse(0);
@@ -198,8 +226,39 @@ public class SubmissionServiceImpl implements SubmissionService {
         stats.put("minScore", min);
         stats.put("count", scores.size());
         stats.put("details", scores);
+        // 成绩分段分布
+        stats.put("distribution", computeDistribution(scores));
+        // 提交状态统计
+        if (statusStats != null) {
+            stats.put("notSubmitted", ((Number) statusStats.get("notSubmitted")).intValue());
+            stats.put("submittedCount", ((Number) statusStats.get("submitted")).intValue());
+            stats.put("totalStudents", ((Number) statusStats.get("total")).intValue());
+        } else {
+            stats.put("notSubmitted", 0);
+            stats.put("submittedCount", 0);
+            stats.put("totalStudents", 0);
+        }
         log.info("[查询成绩统计结果] taskId={}, count={}, avg={}", taskId, scores.size(), Math.round(avg * 100.0) / 100.0);
         return Result.success(stats);
+    }
+
+    /** 计算成绩分段分布：90-100(优秀), 80-89(良好), 70-79(中等), 60-69(及格), <60(不及格) */
+    private Map<String, Integer> computeDistribution(List<Map<String, Object>> scores) {
+        Map<String, Integer> dist = new LinkedHashMap<>();
+        dist.put("excellent", 0);  // 90-100
+        dist.put("good", 0);       // 80-89
+        dist.put("medium", 0);     // 70-79
+        dist.put("pass", 0);       // 60-69
+        dist.put("fail", 0);       // <60
+        for (Map<String, Object> s : scores) {
+            int score = ((Number) s.get("score")).intValue();
+            if (score >= 90) dist.put("excellent", dist.get("excellent") + 1);
+            else if (score >= 80) dist.put("good", dist.get("good") + 1);
+            else if (score >= 70) dist.put("medium", dist.get("medium") + 1);
+            else if (score >= 60) dist.put("pass", dist.get("pass") + 1);
+            else dist.put("fail", dist.get("fail") + 1);
+        }
+        return dist;
     }
 
     @Override
@@ -237,6 +296,15 @@ public class SubmissionServiceImpl implements SubmissionService {
         log.info("[查询我的成绩] studentId={}", studentId);
         List<Map<String, Object>> list = submissionMapper.selectByStudentId(studentId);
         return Result.success(list);
+    }
+
+    @Override
+    public Result<?> getTeacherSubmissionSummary(Long teacherId) {
+        log.info("[教师查看提交汇总] teacherId={}", teacherId);
+        // 获取该教师所有已发布任务的提交状态汇总
+        List<Map<String, Object>> summary = submissionMapper.selectTaskSubmissionSummaryByTeacherId(teacherId);
+        log.info("[教师查看提交汇总结果] count={}", summary.size());
+        return Result.success(summary);
     }
 
     private String saveFile(MultipartFile file, String subDir) throws IOException {

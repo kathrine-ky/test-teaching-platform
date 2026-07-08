@@ -25,6 +25,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    isAdmin: state => state.userInfo?.role === 'ADMIN',
     isTeacher: state => state.userInfo?.role === 'TEACHER',
     isStudent: state => state.userInfo?.role === 'STUDENT',
     userId: state => state.userInfo?.userId,

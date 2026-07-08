@@ -19,6 +19,25 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/common/Dashboard.vue')
       },
+      // ========== 个人信息（所有角色通用） ==========
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/UserModule/views/Profile.vue')
+      },
+      // ========== 管理员端 ==========
+      {
+        path: 'admin/users',
+        name: 'AdminUsers',
+        component: () => import('@/UserModule/views/AdminDashboard.vue'),
+        meta: { role: 'ADMIN' }
+      },
+      {
+        path: 'admin/course/:id',
+        name: 'AdminCourseDetail',
+        component: () => import('@/CourseModule/views/AdminCourseDetail.vue'),
+        meta: { role: 'ADMIN' }
+      },
       // ========== 教师端 ==========
       {
         path: 'teacher/courses',
@@ -30,6 +49,12 @@ const routes = [
         path: 'teacher/tasks',
         name: 'TeacherTasks',
         component: () => import('@/TaskModule/views/TaskManage.vue'),
+        meta: { role: 'TEACHER' }
+      },
+      {
+        path: 'teacher/submissions',
+        name: 'TeacherSubmissions',
+        component: () => import('@/SubmitModule/views/TeacherSubmissions.vue'),
         meta: { role: 'TEACHER' }
       },
       {
@@ -45,6 +70,12 @@ const routes = [
         meta: { role: 'TEACHER' }
       },
       // ========== 学生端 ==========
+      {
+        path: 'student/courses',
+        name: 'StudentCourses',
+        component: () => import('@/CourseModule/views/StudentCourses.vue'),
+        meta: { role: 'STUDENT' }
+      },
       {
         path: 'student/tasks',
         name: 'StudentTasks',
@@ -62,6 +93,19 @@ const routes = [
         name: 'MyScores',
         component: () => import('@/ScoreModule/views/MyScores.vue'),
         meta: { role: 'STUDENT' }
+      },
+      // ========== 讨论区（教师+学生） ==========
+      {
+        path: 'discussion',
+        name: 'DiscussionList',
+        component: () => import('@/DiscussionModule/views/DiscussionList.vue'),
+        meta: { role: 'TEACHER_STUDENT' }
+      },
+      {
+        path: 'discussion/:id',
+        name: 'DiscussionDetail',
+        component: () => import('@/DiscussionModule/views/DiscussionDetail.vue'),
+        meta: { role: 'TEACHER_STUDENT' }
       }
     ]
   }
@@ -85,8 +129,20 @@ router.beforeEach((to, from, next) => {
       next('/login')
     } else {
       const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}')
-      if (to.meta?.role && to.meta.role !== userInfo.role) {
-        next('/dashboard')
+      const routeRole = to.meta?.role
+      if (routeRole) {
+        // TEACHER_STUDENT 表示教师和学生都可以访问
+        if (routeRole === 'TEACHER_STUDENT') {
+          if (userInfo.role !== 'TEACHER' && userInfo.role !== 'STUDENT') {
+            next('/dashboard')
+          } else {
+            next()
+          }
+        } else if (routeRole !== userInfo.role) {
+          next('/dashboard')
+        } else {
+          next()
+        }
       } else {
         next()
       }

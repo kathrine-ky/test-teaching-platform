@@ -12,11 +12,12 @@ public class User {
     private String username;
     private String password;
     private String realName;
-    private String role;        // TEACHER / STUDENT
+    private String role;        // ADMIN / TEACHER / STUDENT
     private String className;
     private String studentNo;
     private String phone;
     private String email;
+    private String gender;      // 男 / 女
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
